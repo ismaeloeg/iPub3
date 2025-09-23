@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class LocalUser extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'avatar',
@@ -15,5 +19,10 @@ class LocalUser extends Model
     protected $hidden = [
         'password'
     ];
+
+    function setPinAttribute($value)
+    {
+        $this->attributes['pin'] = Hash::make($value);
+    }
 
 }

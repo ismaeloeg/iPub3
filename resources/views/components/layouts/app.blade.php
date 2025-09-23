@@ -13,7 +13,7 @@
         <a class="text-5xl" href="{{route("home")}}">Home</a>
     </nav>
 </header>
-<main>
+<main class="p-5">
     {{$slot}}
 </main>
 </body>

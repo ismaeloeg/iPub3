@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\LocalUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\LocalUser>
@@ -17,7 +19,9 @@ class LocalUserFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "name" => $this->faker->name(),
+            "avatar" => $this->faker->imageUrl(),
+            "pin" => $this->faker->randomNumber()
         ];
     }
 }

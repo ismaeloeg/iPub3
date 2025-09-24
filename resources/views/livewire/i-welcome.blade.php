@@ -15,7 +15,7 @@
                 </div>
                 <div class="flex flex-col items-center mt-5 font-bold">
                     <p>{{$selectedUser->name}}</p>
-                    <input type="password" wire:model="pin" placeholder="Introduzca PIN" class="font-light w-3/4 m-1 border-2 rounded-4xl p-2">
+                    <input type="password" wire:model="inputPin" placeholder="Introduzca PIN" class="font-light w-3/4 m-1 border-2 rounded-4xl p-2">
                     <div>
                         <button wire:click="checkPin">Verificar PIN</button>
                         @if (session()->has('message'))

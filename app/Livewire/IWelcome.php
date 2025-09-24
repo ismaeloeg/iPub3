@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\LocalUser;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class IWelcome extends Component
@@ -35,7 +36,7 @@ class IWelcome extends Component
     {
         if ($this->selectedUser) {
 
-            if ($this->inputPin == $this->selectedUser->pin) {
+            if (Hash::check($this->inputPin, $this->selectedUser->pin)) {
                 session()->flash('message', 'Pin Correcto');
             } else {
                 session()->flash('message', 'Pin incorrecto');

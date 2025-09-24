@@ -13,7 +13,8 @@ class LocalUser extends Model
     protected $fillable = [
         'name',
         'avatar',
-        'pin'
+        'pin',
+        'role'
     ];
 
     protected $hidden = [

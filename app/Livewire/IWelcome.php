@@ -38,8 +38,12 @@ class IWelcome extends Component
 
             if (Hash::check($this->inputPin, $this->selectedUser->pin)) {
                 session()->flash('message', 'Pin Correcto');
+                session(['logged_user' => $this->selectedUser]);
+                return redirect()->route('home');
+
             } else {
                 session()->flash('message', 'Pin incorrecto');
+
             }
         }
     }

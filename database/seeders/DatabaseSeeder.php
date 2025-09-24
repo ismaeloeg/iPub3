@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         LocalUser::create([
             'name' => 'admin',
             'pin' => '1075',
+            'role' => 'admin',
         ]);
     }
 }

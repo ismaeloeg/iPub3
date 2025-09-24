@@ -21,7 +21,7 @@ class LocalUserFactory extends Factory
         return [
             "name" => $this->faker->name(),
             "avatar" => $this->faker->imageUrl(),
-            "pin" => $this->faker->randomNumber()
+            'pin' => $this->faker->numberBetween(1000, 9999)
         ];
     }
 }

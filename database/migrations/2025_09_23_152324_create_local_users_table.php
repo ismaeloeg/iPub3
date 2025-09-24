@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('avatar')->nullable();
             $table->string('pin');
+            $table->string('role')->default('user');
             $table->timestamps();
         });
     }

@@ -46,7 +46,7 @@
                 </div>
                 <div class="flex flex-col items-center mt-5 font-bold">
                     <p>{{$user->name}}</p>
-                    <p>{{$user->pin}}</p>
+
                 </div>
             </div>
 

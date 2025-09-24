@@ -7,12 +7,39 @@ use Livewire\Component;
 
 class IWelcome extends Component
 {
-    public $users;
-    public function mount(){
-        $this-> users = LocalUser::get();
+    #VARIABLES
+    public $users, $inputPin;
+    public $selectedUser = null;
+
+
+    #Función al cargar página
+    public function mount()
+    {
+        $this->users = LocalUser::get();
     }
+
     public function render()
     {
         return view('livewire.i-welcome');
+    }
+
+
+    #iFUNCIONES PROPIAS
+    public function selectUser($id)
+    {
+        $this->selectedUser = LocalUser::find($id);
+
+    }
+
+    public function checkPin()
+    {
+        if ($this->selectedUser) {
+
+            if ($this->inputPin == $this->selectedUser->pin) {
+                session()->flash('message', 'Pin Correcto');
+            } else {
+                session()->flash('message', 'Pin incorrecto');
+            }
+        }
     }
 }

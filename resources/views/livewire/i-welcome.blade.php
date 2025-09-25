@@ -1,56 +1,47 @@
-<div class="flex flex-wrap justify-center gap-10 ">
-    {{--USUARIO SELECCIONADO--}}
-    @if($selectedUser)
-        <div wire:click="$set('selectedUser',null )" class="cursor-pointer text-xl">
-            <div class="bg-amber-100 rounded-4xl w-68 h-98 p-3">
-                <div
-                    class="bg-blue-50 border-2 border-black rounded-full w-40 h-40 mx-auto items-center justify-center text-white flex flex-col mt-3">
-                    <p>
-                        @if($selectedUser->avatar)
-                            <img src="{{$selectedUser->avatar}}" alt="Avatar" class=" rounded-full">
-                        @else
-                            <img src="{{asset('images/default_avatar.png')}}" alt="Avatar" class="">
-                        @endif
-                    </p>
-                </div>
-                <div class="flex flex-col items-center mt-5 font-bold">
-                    <p>{{$selectedUser->name}}</p>
-                    <input type="password" wire:model="inputPin" placeholder="Introduzca PIN"
-                           class="font-light w-3/4 m-1 border-2 rounded-4xl p-2">
-                    <div>
-                        <button wire:click="checkPin">Verificar PIN</button>
+<div class="flex flex-wrap gap-5  justify-center ">
 
-                        @if (session()->has('message'))
-                            <p> {{session('message')}}</p>
+    {{--USUARIO NO SELECCIONADO--}}
+    @foreach($users->reverse() as $user)
+        <div wire:click="selectUser({{$user->id}})"
+             class="bg-gray-400 rounded-4xl w-48 h-68 text-black shadow-2xl border-1 m-2">
+            <div
+                class="bg-blue-50 border-2 border-black rounded-full w-40 h-40 mx-auto items-center justify-center text-white flex flex-col mt-3">
+                <img src="{{ $user->avatar ?? asset('images/default_avatar.png') }}" alt="Avatar"
+                     class="rounded-full">
+            </div>
+            <div class="flex flex-col items-center mt-5 font-bold">
+                <p>{{$user->name}}</p>
 
-                        @endif
-                    </div>
-                </div>
             </div>
         </div>
 
-
-        {{--USUARIO NO SELECCIONADO--}}
-    @else
-        @foreach($users->reverse() as $user)
-            <div wire:click="selectUser({{$user->id}})" class="bg-amber-100 rounded-4xl w-48 h-68 ">
-                <div
-                    class="bg-blue-50 border-2 border-black rounded-full w-40 h-40 mx-auto items-center justify-center text-white flex flex-col mt-3">
-                    <p>
-                        @if($user->avatar)
-                            <img src="{{$user->avatar}}" alt="Avatar" class=" rounded-full">
-                        @else
-                            <img src="{{asset('images/default_avatar.png')}}" alt="Avatar" class="">
-                        @endif
-                    </p>
-                </div>
-                <div class="flex flex-col items-center mt-5 font-bold">
-                    <p>{{$user->name}}</p>
-
-                </div>
+    @endforeach
+    {{--USUARIO SELECCIONADO--}}
+    <flux:modal name="user-selection" :show="$showUserModal" wire:model="showUserModal"
+                overlay-class="bg-black bg-opacity-70 backdrop-blur-lg ">
+        @if($selectedUser)
+            <div class="bg-blue-200  shadow-lg rounded-full w-86 m-6 ">
+                <p>
+                    <img src="{{ $selectedUser->avatar ?? asset('images/default_avatar.png') }}" alt="Avatar"
+                         class="rounded-full shadow-black border-3 shadow-2xl">
+                </p>
             </div>
+            <div class="flex flex-col items-center mt-5 font-bold ">
+                <p class="text-2xl">{{$selectedUser->name}}</p>
+                <form wire:submit.prevent="checkPin" class="text-center ">
+                    <input type="password" wire:model="inputPin" autofocus placeholder="Introduzca PIN"
+                           class="font-light w-3/4 m-3 border-2 rounded-4xl p-4">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-4xl">Verificar</button>
 
-        @endforeach
-    @endif
+                </form>
+
+                <p class="{{ session('success') ? ' text-green-800 ' : (session('error') ? 'text-red-400 ' : '') }} px-4 py-3 rounded my-2">
+                    {{ session('success') ?? session('error') }}
+                </p>
+
+
+            </div>
+        @endif
+    </flux:modal>
 </div>
 

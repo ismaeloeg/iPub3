@@ -15,13 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-//        User::factory()->create([
-//            'name' => 'Test User',
-//            'email' => 'test@example.com',
-//        ]);
         LocalUser::factory(15)->create();
+        LocalUser::create([
+            'name' => 'Noadmin',
+            'pin' => '1075',
+            'avatar' => 'images/shinchan.png',
+            'role' => 'user',
+        ]);
 
         LocalUser::create([
             'name' => 'admin',
@@ -29,5 +30,7 @@ class DatabaseSeeder extends Seeder
             'avatar' => 'images/shinchan.png',
             'role' => 'admin',
         ]);
+
     }
+
 }

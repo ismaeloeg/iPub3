@@ -10,6 +10,6 @@ Route::view('/home', "home")
     ->name('home');
 
 Route::get('/logout', function () {
-    session()->forget('logged_user'); // borra el usuario de sesión
+    session()->forget('logged_user');
     return redirect()->route('welcome');
 })->name('logout');
